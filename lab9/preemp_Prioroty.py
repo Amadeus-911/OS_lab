@@ -9,7 +9,7 @@ arr = [
 ]
 amp = []
 for process in arr:
-    amp.append([process[0], 0, 0, 0])
+    amp.append([process[0], 0, 0, 0, process[3], process[1]])
 
 arr.sort(key = lambda x:x[3])
 print(arr)
@@ -51,3 +51,26 @@ for i in range(0, total_time):
             q.pop(0)
     
 print(amp)
+waiting = []
+response = []
+for process in amp:
+    processID = process[0]
+    start = process[1]
+    end = process[2]
+    arrival = process[4]
+    burst = process[5]
+
+    waiting.insert(0,end - arrival - burst)
+    response.insert(0,start - arrival)
+
+    print("Process: ", processID)
+    print("Arrival: ", arrival)
+    print("start: ", start)
+    print("End: ", end)
+    print("Waiting: ", waiting[0])
+    print("Response: ", response[0])
+
+    print("\n")
+
+print("Average waiting time: ", sum(waiting)/len(arr))
+print("Average response time: ", sum(response)/len(arr))
